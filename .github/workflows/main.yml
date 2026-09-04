@@ -1,0 +1,34 @@
+name: Build Royal Fast APK
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Extract Royal Fast project
+        run: |
+          base64 -d RoyalFast_Project_288KB.txt > royalfast.zip
+          unzip -o royalfast.zip
+          cp -a RoyalFast_Final_Source/. .
+          rm -rf RoyalFast_Final_Source royalfast.zip RoyalFast_Project_288KB.txt
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Build APK
+        run: gradle assembleDebug
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: RoyalFast-debug-apk
+          path: app/build/outputs/apk/debug/*.apk
