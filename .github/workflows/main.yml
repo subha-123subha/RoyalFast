@@ -11,12 +11,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Extract Royal Fast project
+      - name: Find and extract Royal Fast project
         run: |
-          base64 -d RoyalFast_Project_288KB.txt > royalfast.zip
+          FILE=$(find . -name "RoyalFast_Project_288KB.txt" -type f | head -n 1)
+          echo "Found file: $FILE"
+          base64 -d "$FILE" > royalfast.zip
           unzip -o royalfast.zip
           cp -a RoyalFast_Final_Source/. .
-          rm -rf RoyalFast_Final_Source royalfast.zip RoyalFast_Project_288KB.txt
+          rm -rf RoyalFast_Final_Source royalfast.zip "$FILE"
 
       - name: Set up Java
         uses: actions/setup-java@v4
