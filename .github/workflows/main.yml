@@ -29,11 +29,11 @@ jobs:
 
       - name: Build APK
         run: |
-          cd RoyalFast_Final_Source
+         cd src/RoyalFast_Final_Source
           gradle assembleDebug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: RoyalFast-debug-apk
-          path: RoyalFast_Final_Source/app/build/outputs/apk/debug/*.apk
+          path: src/RoyalFast_Final_Source/app/build/outputs/apk/debug/*.apk
