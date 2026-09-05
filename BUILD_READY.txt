@@ -1,0 +1,5 @@
+Royal Fast - Build Ready Android project
+Package: com.royalfast.app
+Firebase project: royal-fast-856c8
+Build with Gradle 8.7 / Android Gradle Plugin 8.5.2.
+This is a source project, not a prebuilt APK.
